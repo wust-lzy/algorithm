@@ -86,3 +86,7 @@ int func(int l,int r,vector<int>&a){
 int inversePairs(vector<int>& nums) {
     return func(0, nums.size() - 1,nums);
 }
+
+int getMissingNumber(vector<int>& nums) {
+        
+}
