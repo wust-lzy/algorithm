@@ -88,5 +88,40 @@ int inversePairs(vector<int>& nums) {
 }
 
 int getMissingNumber(vector<int>& nums) {
-        
+    int l = 0, r = nums.size() - 1;
+    while(l<r){
+        int mid = l + r >> 1;
+        if(nums[mid]!=mid)
+            r = mid;
+        else
+            l = mid + 1;
+    }
+    return l;
+}
+int getNumberSameAsIndex(vector<int>& nums) {
+    int l = 0, r = nums.size() - 1;
+    while(l<=r){
+        int mid = l + r >> 1;
+        if(mid==nums[mid])
+            return mid;
+        if(mid>nums[mid])
+            l = mid + 1;
+        else
+            r = mid;
+    }
+    return -1;
+}
+
+vector<int> findNumsAppearOnce(vector<int>& nums) {
+    int sum = 0;
+    for(int x:nums)//结果为x^y
+        sum ^= x;
+    int X = 0;
+    int k = 0;
+    while(!(sum>>k&1))//假设x第k为为1
+        k++;
+    for(int e:nums)//得到k位为1的所有集合
+        if(e>>k&1)
+            X ^= e;
+    return {X, sum ^ X}; //x^y^x  得到y
 }
