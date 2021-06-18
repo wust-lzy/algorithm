@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 const int N = 1e6 + 10;
-int q[N], hh, tt;//hh队头  tt队尾
+int q[N], hh, tt=-1;//hh队头  tt队尾
 
 int front()
 {
@@ -9,7 +9,7 @@ int front()
 }
 
 void push(int x){
-    q[tt++] = x;
+    q[++tt] = x;
 }
 
 void pop(){
@@ -17,7 +17,7 @@ void pop(){
 }
 
 bool isEmpty(){
-    return hh>=tt;
+    return hh>tt;
 }
 int main()
 {

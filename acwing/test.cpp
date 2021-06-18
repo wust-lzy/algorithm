@@ -224,13 +224,13 @@ int minFlips(string s)
         return 0;
     if (n > 2)
     {
-        while (s[0] == s[1] )
+        while (s[0] == s[1])
         {
             char t = s[0];
             s = s.substr(1) + t;
         }
     }
-    int ans1 = 0, ans2 = 0 ;
+    int ans1 = 0, ans2 = 0;
     for (int i = 0; i < n; i++)
     {
         if ((i % 2) && s[i] == '1' || !(i % 2) && s[i] == '0')
@@ -238,21 +238,22 @@ int minFlips(string s)
         if ((i % 2) && s[i] == '0' || !(i % 2) && s[i] == '1')
             ans2++;
     }
-    return  min(ans1, ans2);
+    return min(ans1, ans2);
 }
 
-vector<vector<int> > findContinuousSequence(int sum) {
+vector<vector<int>> findContinuousSequence(int sum)
+{
     vector<vector<int>> ans;
     int tempsum = 0;
-    for (int i = 1, j = 1; j < sum;j++)
+    for (int i = 1, j = 1; j < sum; j++)
     {
         tempsum += j;
-        while(tempsum>sum)
+        while (tempsum > sum)
             tempsum -= i++;
-        if(tempsum==sum)
+        if (tempsum == sum)
         {
             vector<int> temp;
-            for (int k = i; k <= j;k++)
+            for (int k = i; k <= j; k++)
                 temp.push_back(k);
             ans.push_back(temp);
         }
@@ -260,19 +261,116 @@ vector<vector<int> > findContinuousSequence(int sum) {
     return ans;
 }
 
-vector<int> maxInWindows(vector<int>& nums, int k) {
+vector<int> maxInWindows(vector<int> &nums, int k)
+{
     vector<int> ans;
     priority_queue<int> q;
-    for (int i = 0; i < k;i++)
+    for (int i = 0; i < k; i++)
         q.push(nums[i]);
-    for (int i = k; i < nums.size();i++)
+    for (int i = k; i < nums.size(); i++)
 
         return ans;
 }
 
-vector<int> numberOfDice(int n) {
+vector<int> numberOfDice(int n)
+{
     vector<int> ans;
-    const int N = 6 * n+20;
+    const int N = 6 * n + 20;
     int dp[N];
-    dp[n+10] = 1;
+    dp[n + 10] = 1;
+}
+
+bool isCovered(vector<vector<int>> &ranges, int left, int right)
+{
+    unordered_map<int, int> vis;
+    for (int i = 0; i < ranges.size(); i++)
+    {
+        for (int j = ranges[i][0]; j <= ranges[i][1]; j++)
+            vis[j] = 1;
+    }
+    for (int i = left; i <= right; i++)
+        if (!vis[i])
+            return false;
+    return true;
+}
+
+int chalkReplacer(vector<int> &chalk, int k)
+{
+    long long sum = 0;
+    int i = 0, n = chalk.size();
+    for (int j = 0; j < n; j++)
+        sum += chalk[j];
+    if (k >= sum)
+        k %= sum;
+    while (1)
+    {
+        i %= n;
+        k -= chalk[i];
+        if (k < 0)
+            return i;
+        i++;
+    }
+}
+bool ok(vector<vector<int>>& grid,int i,int j,int n){
+    int sum = 0;
+    for (int x = 0; x < n;x++)
+        sum += grid[i][x+j];
+    for (int x = 1; x < n;x++){ //每一行
+        int temp = 0;
+        for (int y = 0; y < n;y++)
+            temp += grid[x+i][y+j];
+        if(temp!=sum)
+            return false;
+    }
+    for (int x = 0; x < n;x++)  //每一列
+    {
+        int temp = 0;
+        for (int y = 0; y < n;y++)
+            temp += grid[y+i][x+j];
+        if(temp!=sum)
+            return false;
+    }
+    int temp = 0;
+    for (int x = 0; x < n;x++)
+        temp += grid[x+i][x+j];
+    if(temp!=sum)
+        return false;
+    temp = 0;
+    for (int x = 0; x <n ;x++)
+        temp += grid[x+i][n-1-x+j];
+    if(temp!=sum)
+        return false;
+    return true;
+}
+int largestMagicSquare(vector<vector<int>>& grid) {
+    int n = grid.size(), m = grid[0].size();
+    int ans = min(n, m);
+    while(ans){
+        cout << ans << endl;
+        for (int i = 0; i <= n-ans;i++){
+            for (int j = 0; j <= m-ans;j++){
+                if(ok(grid,i,j,ans))
+                    return ans;
+            }
+        }
+        ans--;
+    }
+    return ans;
+}
+
+vector<int> maxInWindows(vector<int>& nums, int k) {
+    int n = nums.size();
+    deque<int> q;
+    vector<int> ans;
+    for (int i = 0; i < n;i++){
+        while(!q.empty()&&i-k+1>q.front()){//维护滑动窗口的大小
+            q.pop_front();
+        }
+        while(!q.empty()&&nums[q.back()]<=nums[i])
+            q.pop_back();
+        q.push_back(i);
+        if(i>=k-1)
+            ans.push_back(nums[q.front()]);
+    }
+    return ans;
 }
