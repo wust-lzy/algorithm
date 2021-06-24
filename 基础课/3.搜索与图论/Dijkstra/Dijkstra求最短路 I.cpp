@@ -6,7 +6,7 @@ using namespace std;
 const int N = 510;
 const int inf = 1e8;
 int n, m;
-int g[N][N], dis[N];
+int e[N][N], dis[N];
 bool vis[N];
 
 int dijkstra()
@@ -15,17 +15,18 @@ int dijkstra()
     dis[1] = 0;//起点距离为0
     for (int i = 0; i < n-1;i++)//枚举中介点
     {
-        int t = -1;
+        int u = -1;
         for (int j = 1; j <= n;j++)
         {
-            if(!vis[j]&&(t==-1||dis[t]>dis[j]))
-                t = j;
+            if(!vis[j]&&(u==-1||dis[u]>dis[j]))
+                u = j;
         }
-        if(t==-1)
+        if(u==-1)
             break;
-        for (int j = 1; j <= n;j++)
-            dis[j] = min(dis[j], dis[t] + g[t][j]);
-        vis[t] = true;
+        vis[u] = true;
+        for (int v = 1; v <= n;v++)
+            dis[v] = min(dis[v], dis[u] + e[u][v]);
+        
     }
     if(dis[n]==inf)
         return -1;
@@ -34,12 +35,12 @@ int dijkstra()
 int main()
 {
     scanf("%d %d", &n, &m);
-    fill(g[0], g[0] + N * N, inf);//初始化边
+    fill(e[0], e[0] + N * N, inf);//初始化边
     while(m--)
     {
         int a, b, c;
         scanf("%d %d %d", &a, &b, &c);
-        g[a][b] = min(g[a][b], c);
+        e[a][b] = min(e[a][b], c);
     }
     printf("%d\n", dijkstra());
     return 0;
