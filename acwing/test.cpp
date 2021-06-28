@@ -374,3 +374,20 @@ vector<int> maxInWindows(vector<int>& nums, int k) {
     }
     return ans;
 }
+vector<vector<int>> rotateGrid(vector<vector<int>>& g, int k) {
+        vector<vector<int>>ans=g;
+        int n=g.size(),m=g[0].size();
+        for(int a=n,b=m,i=0;a>0&&b>0;a-=2,b-=2,i++){
+            int x=i,y=i;
+            vector<vector<int>>q;
+            for(int j=0;j<b-1;j++) q.push_back({x,++y});//右
+            for(int j=0;j<a-1;j++) q.push_back({++x,y});//下
+            for(int j=0;j<b-1;j++) q.push_back({x,--y});//左
+            for(int j=0;j<a-1;j++) q.push_back({++x,y});//上
+            for(int j=0;j<q.size();j++){
+                int t=(j+k)%q.size();
+                ans[q[j][0]][q[j][1]]=g[q[t][0]][q[t][1]];
+            }
+        }
+        return ans;
+}
