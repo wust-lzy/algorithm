@@ -2,3 +2,4 @@
 牙刷
 衣服
 衣架
+sendActivationResult
