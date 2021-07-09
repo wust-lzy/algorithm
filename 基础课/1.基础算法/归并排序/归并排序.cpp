@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 typedef long long ll;
 const int N = 1e5 + 5;
@@ -11,7 +11,7 @@ void merge_sort(int q[], int l, int r)
     merge_sort(q, l, mid);
     merge_sort(q, mid + 1, r);
     int k = 0, i = l, j = mid + 1;
-    while (i <= mid && j <= r)
+    while (i <= mid && j <= r)//将两个有序区间合并成一个有序区间
     {
         if (q[i] <= q[j])
             tmp[k++] = q[i++];
@@ -22,7 +22,7 @@ void merge_sort(int q[], int l, int r)
         tmp[k++] = q[i++];
     while (j <= r)
         tmp[k++] = q[j++];
-    for (i = l, j = 0; i <= r; i++, j++)
+    for (i = l, j = 0; i <= r; i++, j++)//将临时数组的值存到答案数组
         q[i] = tmp[j];
 }
 int main()
@@ -33,10 +33,6 @@ int main()
         scanf("%d", &a[i]);
     merge_sort(a, 0, n - 1);
     for (int i = 0; i < n; i++)
-    {
-        printf("%d", a[i]);
-        if (i != n - 1)
-            printf(" ");
-    }
+        printf("%d ", a[i]);
     return 0;
 }
