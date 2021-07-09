@@ -7,7 +7,7 @@ using namespace std;
 
 void merge_section(vector<pi>&p){
     vector<pi> ans;
-    sort(p.begin(), p.end());
+    sort(p.begin(), p.end());//左端点从小到大排序
     int st = -2e9, ed = -2e9;
     for(pi e:p){
         if(ed<e.first){
