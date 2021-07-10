@@ -3,7 +3,7 @@
 #include<cstring>
 using namespace std;
 
-const int N = 1e5 + 10;
+const int N = 100010;
 
 int main()
 {
