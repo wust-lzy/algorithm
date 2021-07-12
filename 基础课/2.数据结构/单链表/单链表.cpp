@@ -2,7 +2,7 @@
 
 using namespace std;
 const int N = 1e6 + 10;
-//head表示头结点 e[i]表示value   ne[i]表示next指针
+//head表示头结点 e[i]表示节点i的value   ne[i]表示节点i的next指针
 //idx存储当前用到的点
 int head, e[N], ne[N], idx;
 //初始化
@@ -49,7 +49,7 @@ int main()
         else if(c=='D')
         {
             cin >> k;
-            if(!k)
+            if(!k)//删除第一个点 即头节点
                 head = ne[head];
             remove(k-1);
         }else{
