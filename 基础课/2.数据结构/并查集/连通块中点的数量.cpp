@@ -15,29 +15,33 @@ void Union(int a,int b)
 {
     int fa = findfather(a);
     int fb = findfather(b);
-    se[fb] += se[fa];
-    father[fa] = fb;
+    if(fa!=fb)//已经在一个集合里面就不需要维护了
+    {
+        se[fb] += se[fa];
+        father[fa] = fb;
+    }
 }
 int main()
 {
     int n, m;
     scanf("%d %d", &n, &m);
-    for (int i = 1; i <= n;i++){
+    for (int i = 1; i <= n;i++)
+    {
         father[i] = i;
         se[i] = 1;
     }
-    while(m--){
+    while(m--)
+    {
         char c[2];
         int a, b;
         scanf("%s %d", c, &a);
         if(c[0]=='C')
         {
             scanf("%d", &b);
-            if(findfather(a)==findfather(b))
-                continue;
             Union(a, b);
         }
-        else if(c[1]=='1'){
+        else if(c[1]=='1')
+        {
             scanf("%d", &b);
             printf("%s\n", findfather(a) == findfather(b) ? "Yes" : "No");
         }

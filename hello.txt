@@ -3,3 +3,4 @@
 衣服
 衣架
 sendActivationResult
+https://restapi.amap.com/v3/weather/weatherInfo?key=45a5b7d9cba1547c86a84ee245cd1c52"+"&city="+list[i].adcode
