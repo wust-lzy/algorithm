@@ -1,11 +1,17 @@
 #include<iostream>
 #include<algorithm>
+#include<bits/stdc++.h>
 using namespace std;
 
 const int N=510,inf=1e8;
 int e[N][N],dis[N];
 int n,m;
 bool vis[N];
+
+
+
+
+
 int dijstra()
 {
     fill(dis,dis+N,inf);
@@ -27,6 +33,14 @@ int dijstra()
         return -1;
     return dis[n];
 }
+
+
+
+vector<int> LRU(vector<vector<int> >& op, int k) {
+    unordered_map<int, int> vis;
+    unordered_map<int, int> ans;
+}
+
 int main()
 {
     fill(e[0],e[0]+N*N,inf);
