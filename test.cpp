@@ -36,10 +36,6 @@ int dijstra()
 
 
 
-vector<int> LRU(vector<vector<int> >& op, int k) {
-    unordered_map<int, int> vis;
-    unordered_map<int, int> ans;
-}
 
 int main()
 {
