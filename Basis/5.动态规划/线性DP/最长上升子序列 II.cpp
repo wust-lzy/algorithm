@@ -7,7 +7,7 @@ using namespace std;
 把它接到后面，判断是否能形成更长的序列
 */
 const int N = 1e6 + 10;
-int a[N], q[N];
+int a[N], q[N];//q[i]记录长度为i的元素的最小值
 int main()
 {
     int n;

@@ -4,7 +4,7 @@
 using namespace std;
 
 const int N = 1e3 + 10;
-int v[N], w[N],s[N], f[N][N];//f[i][j]表示前i件物品背包体积为i的最大价值
+int v[N], w[N],s[N], f[N][N];//f[i][j]表示前i件物品背包体积为j的最大价值
 int n, m;
 int main()
 {
