@@ -7,12 +7,12 @@ using namespace std;
 
 const int N = 12, M = 1 << 10, K = 110;
 int n, m;
-vector<int> vis;
-int cnt[M];
+vector<int> vis;//记录哪些合法的行
+int cnt[M];//记录合法的每一行有多少个1
 vector<int> head[M];
 int f[N][K][M];
 
-bool check(int st)
+bool check(int st)  //检查没有两个相邻的1
 {
     for (int i = 0; i < n; i++)
     {
@@ -21,7 +21,7 @@ bool check(int st)
     }
     return 1;
 }
-int count(int st)
+int count(int st)   //每一行1的个数
 {
     int ans = 0;
     for (int i = 0; i < n; i++)
@@ -39,29 +39,21 @@ int main()
             cnt[i] = count(i);
         }
     }
-    for (int i = 0; i < vis.size(); i++)
-    {
-        for (int j = 0; j < vis.size(); j++)
-        {
+    for (int i = 0; i < vis.size(); i++){
+        for (int j = 0; j < vis.size(); j++){
             int a = vis[i], b = vis[j];
-            if ((a & b) == 0 && check(a | b))
-            {
+            if ((a & b) == 0 && check(a | b)){
                 head[i].push_back(j);
             }
         }
     }
     f[0][0][0] = 1;
-    for (int i = 1; i <= n + 1; i++)
-    {
-        for (int j = 0; j <= m; j++)
-        {
-            for (int a = 0; a < vis.size(); a++)
-            {
-                for (int b : head[a])
-                {
+    for (int i = 1; i <= n + 1; i++){
+        for (int j = 0; j <= m; j++){
+            for (int a = 0; a < vis.size(); a++){
+                for (int b : head[a]){
                     int c = cnt[vis[a]];
-                    if (j >= c)
-                    {
+                    if (j >= c){
                         f[i][j][a] += f[i - 1][j - c][b];
                     }
                 }
